@@ -1,5 +1,261 @@
-<html>
-    <body>
-        <p>hello world</p>
-    </body>
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <style media="screen" type="text/css">.modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    #mDiv{
+        width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color:white;
+        position: relative; top: 30px;
+        padding: 20px;
+        
+    }
+
+    #links{
+        width: 960px;
+        background-color:#c5050c;
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        top: 0px;
+        width:100%;
+        margin: 0 0 0 -50%;
+        left:50%;
+    }
+
+    #centered{
+        text-align: center;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    body{
+        
+        background-image: linear-gradient(to bottom, #c5050c, #c5050c 130px, #F7F7F7 100px, #F7F7F7);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    </style>
+
+</head>
+
+
+
+
+<body>
+
+    <div id="mDiv">
+        <img id ="logo" src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_bBCsLCCeBif4ma1" width=300px;>
+        <br>
+        <p id="test"></p>
+        <p id="test2"></p>
+        <div id= "centered">
+        If you'd like to take a break, click any of the three links, above, to open comics.
+        <br><br>
+       
+            
+        <img id ="fungi" src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_81XxTbW3FEeK85f">
+        
+        </div>
+
+    </div>
+
+    <div id="links">
+            
+            <button id="myBtn">Read XKCD Comics</button>
+            <button id="myBtn2">Read Dilbert Comics</button>
+            <button id="myBtn3">Read New Yorker Comics</button>
+            
+            <br>
+    </div>
+
+
+    <div class="modal" id="myModal">
+    <div class="modal-content"><span class="close">x</span>
+
+    <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_6rIYCfG84F8jBGd" width=100%></p>
+    </div>
+    </div>
+
+    <div class="modal" id="myModal2">
+    <div class="modal-content"><span class="close">x</span>
+
+    <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_0fELoHO9Xm2077D" width=100%></p>
+    </div>
+    </div>
+
+    <div class="modal" id="myModal3">
+    <div class="modal-content"><span class="close">x</span>
+
+    <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_0wCeyMJrYRpYXBz" width=100%></p>
+    </div>
+    </div>
+
+    <script>
+            // Initialize the variables
+        var pageOpen = new Date();
+        //var IDNo = 666
+        //var condition = 1
+        var distractedTime = 0
+        //document.getElementById("test2").innerHTML = distractedTime;	
+        var openTime
+        var closeTime
+        var popOpen = 0;
+            
+        // Get the modal
+        var modal = document.getElementById('myModal');
+        var modal2 = document.getElementById('myModal2');
+        var modal3 = document.getElementById('myModal3');
+        
+        
+        // Get the buttons that opens the modal
+        var btn = document.getElementById("myBtn");
+        var btn2 = document.getElementById("myBtn2");
+        var btn3 = document.getElementById("myBtn3");
+        
+        // Get the <span> elements that close each modal
+        var span = document.getElementsByClassName("close")[0];
+        var span2 = document.getElementsByClassName("close")[1];
+        var span3 = document.getElementsByClassName("close")[2];
+        
+            
+        // Tell the computer what to do when time runs out. Close any open popup and store time.
+        
+        function timeUp() {
+            if(popOpen ==1) {
+                popOpen = 0;
+                    modal.style.display = "none";
+                modal2.style.display = "none";
+                modal3.style.display = "none";
+                closeTime = new Date();
+                distractedTime = distractedTime + Math.abs(closeTime - openTime);
+                //document.getElementById("test2").innerHTML = distractedTime;	
+                            }
+                window.alert("Please get your supervisor to complete the next part.");
+                var IDNo = window.prompt("Have your supervisor to enter your ID Number here:");
+                var condition = window.prompt("Have your supervisor to enter your condition here:");
+                var myLink = "https://uwmadison.co1.qualtrics.com/jfe/form/SV_cvkL4C9ct7wcgyp?DT="+ distractedTime + "&ID=" + IDNo + "&CN=" + condition;
+                window.location.href =(myLink);
+            
+        }
+        
+        // Start timing from the second the page opens. End when specified below, in miliseconds
+        
+        setTimeout(timeUp,20000);
+        
+        
+            
+        // When the user clicks on the button, open the modal 
+        btn.onclick = function() {
+            popOpen = 1;
+            modal.style.display = "block";
+            openTime = new Date();
+            //document.getElementById("test").innerHTML = openTime;	
+        }
+        
+        // When the user clicks on 2nd button, open the modal 
+        btn2.onclick = function() {
+            popOpen = 1;
+            modal2.style.display = "block";
+            openTime = new Date();
+            //document.getElementById("test").innerHTML = openTime;	
+        }
+        
+        // When the user clicks on 3rd button, open the modal 
+        btn3.onclick = function() {
+            popOpen = 1;
+            modal3.style.display = "block";
+            openTime = new Date();
+            //document.getElementById("test").innerHTML = openTime;	
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            popOpen = 0;
+            modal.style.display = "none";
+            closeTime = new Date();
+            distractedTime = distractedTime + Math.abs(closeTime - openTime);
+            //document.getElementById("test2").innerHTML = distractedTime;	
+        }
+        span2.onclick = function() {
+            popOpen = 0;
+            modal2.style.display = "none";
+            closeTime = new Date();
+            distractedTime = distractedTime + Math.abs(closeTime - openTime);
+            //document.getElementById("test2").innerHTML = distractedTime;	
+        }
+        span3.onclick = function() {
+            popOpen = 0;
+            modal3.style.display = "none";
+            closeTime = new Date();
+            distractedTime = distractedTime + Math.abs(closeTime - openTime);
+            //document.getElementById("test2").innerHTML = distractedTime;	
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                closeTime = new Date();
+            distractedTime = distractedTime + Math.abs(closeTime - openTime);
+            //document.getElementById("test2").innerHTML = distractedTime;	
+            }
+            if (event.target == modal2) {
+                modal2.style.display = "none";
+                closeTime = new Date();
+            distractedTime = distractedTime + Math.abs(closeTime - openTime);
+            //document.getElementById("test2").innerHTML = distractedTime;	
+            }
+            if (event.target == modal3) {
+                modal3.style.display = "none";
+                closeTime = new Date();
+            distractedTime = distractedTime + Math.abs(closeTime - openTime);
+            //document.getElementById("test2").innerHTML = distractedTime;	
+            }
+        
+        }
+            
+            
+        </script>
+
+</body>
+
 </html>
