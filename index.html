@@ -236,18 +236,21 @@
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modal) {
+                popOpen = 0;
                 modal.style.display = "none";
                 closeTime = new Date();
             distractedTime = distractedTime + Math.abs(closeTime - openTime);
             //document.getElementById("test2").innerHTML = distractedTime;	
             }
             if (event.target == modal2) {
+                popOpen = 0;
                 modal2.style.display = "none";
                 closeTime = new Date();
             distractedTime = distractedTime + Math.abs(closeTime - openTime);
             //document.getElementById("test2").innerHTML = distractedTime;	
             }
             if (event.target == modal3) {
+                popOpen = 0;
                 modal3.style.display = "none";
                 closeTime = new Date();
             distractedTime = distractedTime + Math.abs(closeTime - openTime);
