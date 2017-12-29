@@ -325,7 +325,6 @@
         function checkProblem() {
             var x = document.getElementById("myNumber").value;
             document.getElementById("Error").innerHTML = "";
-            document.getElementById("myNumber").innerHTML = "Incorrect: " + nCorrect;
             if(x == ""){
                 document.getElementById("Error").innerHTML = "You must enter an answer before submitting.";
             }
@@ -337,7 +336,7 @@
             }
             else{
                 nIncorrect = nIncorrect + 1;
-                document.getElementById("nInc").innerHTML = "Incorrect: " + nIncorrect;
+                //document.getElementById("nInc").innerHTML = "Incorrect: " + nIncorrect;
                 makeProblem();
             }
 
