@@ -72,7 +72,7 @@
     /* Modal Content/Box */
     .modal-content {
         background-color: #fefefe;
-        margin: 15% auto; /* 15% from the top and centered */
+        margin: 3% auto; /* 15% from the top and centered */
         padding: 20px;
         border: 1px solid #888;
         width: 80%; /* Could be more or less, depending on screen size */
@@ -113,22 +113,31 @@
         <img id ="logo" src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_bBCsLCCeBif4ma1" width=300px;>
         <br>
         <div id= "centered">
-            If you'd like to take a break, click any of the three links, above, to open comics.
+            If you'd like to take a break, click any of the three links, above, to open comics.<br>
+            
             <br><br>
         
             <h2 id = "Problem"></h2>
             
             
             <input type="number" id="myNumber" value= "">
-            <p id = "Error"></p>
             <p>Press 'Enter' to Submit Your Answer</p>
+            <p id = "Error"></p>
+            
             
             <h2 id = "Ans"></h2>
             <h2 id = "Num1"></h2>
             <h2 id = "Num2"></h2>
             <p id = "nCor"></p>
             <p id = "nInc"></p>
+            <p id = "activ"></p>
+            <p id = "test2"></p>
+            
         </div>
+        <div align = "right">
+                <button id="myBtn4"><img src="CheatSheet.jpg" width=200px></button>
+        </div>
+       
         <br><br><br><br><br><br><br><br><br><br>
     </div>
 
@@ -141,6 +150,7 @@
             <br>
     </div>
 
+    
 
     <div class="modal" id="myModal">
     <div class="modal-content"><span class="close">x</span>
@@ -163,32 +173,47 @@
     </div>
     </div>
 
+    <div class="modal" id="myModal4">
+    <div class="modal-content"><span class="close">x</span>
+    
+     <p><img src="CheatSheet.jpg" width=100%></p>
+     </div>
+     </div>
+
+
     <script>
         // Initialize the variables
         var pageOpen = new Date();
         //var IDNo = 666
         //var condition = 1
-        var distractedTime = 0
+        var distractedTime = 0;
+        var studyTime = 0;
         //document.getElementById("test2").innerHTML = distractedTime;	
-        var openTime
-        var closeTime
+        var openTime;
+        var closeTime;
+        var studyOpenTime;
+        var studyCloseTime;
         var popOpen = 0;
+        var activity = "";
+        document.getElementById("activ").innerHTML = activity;
             
         // Get the modal
         var modal = document.getElementById('myModal');
         var modal2 = document.getElementById('myModal2');
         var modal3 = document.getElementById('myModal3');
-        
+        var modal4 = document.getElementById('myModal4');
         
         // Get the buttons that opens the modal
         var btn = document.getElementById("myBtn");
         var btn2 = document.getElementById("myBtn2");
         var btn3 = document.getElementById("myBtn3");
-        
+        var btn4 = document.getElementById("myBtn4");
+
         // Get the <span> elements that close each modal
         var span = document.getElementsByClassName("close")[0];
         var span2 = document.getElementsByClassName("close")[1];
         var span3 = document.getElementsByClassName("close")[2];
+        var span4 = document.getElementsByClassName("close")[3];
         
         function getURLParameter(name) {
               return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
@@ -202,16 +227,18 @@
                     modal.style.display = "none";
                 modal2.style.display = "none";
                 modal3.style.display = "none";
+                modal4.style.display = "none";
                 closeTime = new Date();
                 distractedTime = distractedTime + Math.abs(closeTime - openTime);
+                studyTime = studyTime + Math.abs(studyCloseTime - studyOpenTime);
                 //document.getElementById("test2").innerHTML = distractedTime;	
                             }
                 //window.alert("Please get your supervisor to complete the next part.");
                 var IDNo = getURLParameter('ID');
                 var condition = getURLParameter('CN');
-                var myLink = "https://uwmadison.co1.qualtrics.com/jfe/form/fjdkasl;fjdksla;fjadskl;DT="+ distractedTime + "&ID=" + IDNo + "&CN=" + condition + "&NC=" + nCorrect + "NI" + nIncorrect;
-                //activate the code below once I change the link^: 
-                //window.location.href =(myLink);
+                var myLink = "https://uwmadison.co1.qualtrics.com/jfe/form/SV_5cDEnJ8AIaieBrn?DT="+ distractedTime + "&ST=" + studyTime + "&ID=" + IDNo + "&CN=" + condition + "&NC=" + nCorrect + "&NI=" + nIncorrect + "&AV=" + activity;
+                //The line below navigates to the link: 
+                window.location.href =(myLink);
             
         }
         
@@ -226,6 +253,7 @@
             popOpen = 1;
             modal.style.display = "block";
             openTime = new Date();
+            activity += "b";
             //document.getElementById("test").innerHTML = openTime;	
         }
         
@@ -234,6 +262,7 @@
             popOpen = 1;
             modal2.style.display = "block";
             openTime = new Date();
+            activity += "b";
             //document.getElementById("test").innerHTML = openTime;	
         }
         
@@ -242,6 +271,16 @@
             popOpen = 1;
             modal3.style.display = "block";
             openTime = new Date();
+            activity += "b";
+            //document.getElementById("test").innerHTML = openTime;	
+        }
+
+        // When the user clicks on 4th button, open the modal 
+        btn4.onclick = function() {
+            popOpen = 1;
+            modal4.style.display = "block";
+            studyOpenTime = new Date();
+            activity += "s";
             //document.getElementById("test").innerHTML = openTime;	
         }
         
@@ -267,6 +306,14 @@
             distractedTime = distractedTime + Math.abs(closeTime - openTime);
             //document.getElementById("test2").innerHTML = distractedTime;	
         }
+
+        span4.onclick = function() {
+            popOpen = 0;
+            modal4.style.display = "none";
+            studyCloseTime = new Date();
+            studyTime = studyTime + Math.abs(studyCloseTime - studyOpenTime);
+            document.getElementById("test2").innerHTML = studyTime;		
+        }
         
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
@@ -291,14 +338,27 @@
             distractedTime = distractedTime + Math.abs(closeTime - openTime);
             //document.getElementById("test2").innerHTML = distractedTime;	
             }
+            if (event.target == modal4) {
+                popOpen = 0;
+                modal4.style.display = "none";
+                studyCloseTime = new Date();
+            studyTime = studyTime + Math.abs(studyCloseTime - studyOpenTime);
+            document.getElementById("test2").innerHTML = studyTime;	
+            }
         
         }
 
         var n1 = Math.floor(Math.random() * 99) + 1; 
         var n2 = Math.floor(Math.random() * 99) + 1; 
-        var ans = n1*n2
-        var nCorrect = 0
-        var nIncorrect = 0
+        var ans = n1*n2;
+        var nCorrect = 0;
+        var nIncorrect = 0;
+
+        // Initialize lists of predetermined problems and the index variable to interate through them
+        var tN = [12,25,22,30,61,15,33,14,20];
+        var bN = [44,21,12,25,12,30,21,13,45];
+        var i = 0;
+
 
         makeProblem();
 
@@ -309,16 +369,23 @@
         };
 
         function makeProblem(){
-            n1 = Math.floor(Math.random() * 30) + 10; 
-            n2 = Math.floor(Math.random() * 30) + 10; 
+            document.getElementById("activ").innerHTML = activity;
+            n1 = tN[i];
+            n2 = bN[i];
+            if(i > tN.length-1){
+                n1 = Math.floor(Math.random() * 50) + 10; 
+                n2 = Math.floor(Math.random() * 50) + 10; 
+            }
+            
             ans = n1*n2
             //document.getElementById("Num1").innerHTML = "Num 1 equals " + n1;
             //document.getElementById("Num2").innerHTML = "Num 2 equals " + n2;
-            document.getElementById("Problem").innerHTML = n1 + " x " + n2;
+            document.getElementById("Problem").innerHTML =  "&nbsp;&nbsp;&nbsp;" + n1  + "<br> x " + n2;
             //document.getElementById("Ans").innerHTML = ans;
             document.getElementById("nCor").innerHTML = "Correct: " + nCorrect;
             //document.getElementById("nInc").innerHTML = "Incorrect: " + nIncorrect;
             document.getElementById("myNumber").value = "";
+            i = i+1;
         }
 
 
@@ -332,10 +399,12 @@
             else if(x == ans){
                 nCorrect = nCorrect + 1;
                 document.getElementById("nCor").innerHTML = "Correct: " + nCorrect;
+                activity += "c";
                 makeProblem();
             }
             else{
                 nIncorrect = nIncorrect + 1;
+                activity += "i";
                 //document.getElementById("nInc").innerHTML = "Incorrect: " + nIncorrect;
                 makeProblem();
             }
