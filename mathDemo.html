@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <style media="screen" type="text/css">.modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
+
+    input[type=number] {
+        border: 2px solid #c5050c;
+        border-radius: 4px;
+        width: 150px;
+        height: 30px;
+        text-align: center; 
+    }
+
+    input[type=number]:focus, textarea:focus {
+        box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+        padding: 3px 0px 3px 3px;
+        margin: 5px 1px 3px 0px;
+        border: 1px solid rgba(81, 203, 238, 1);
+    }
+
+    input[type=number], textarea {
+        outline: none;
+        padding: 3px 0px 3px 3px;
+        margin: 5px 1px 3px 0px;
+        border: 1px solid #DDDDDD;
+    }
+
+    #mDiv{
+        width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color:white;
+        position: relative; top: 30px;
+        padding: 20px;
+        
+    }
+
+    #links{
+        width: 960px;
+        background-color:#c5050c;
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        top: 0px;
+        width:100%;
+        margin: 0 0 0 -50%;
+        left:50%;
+    }
+
+    #centered{
+        text-align: center;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 3% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    body{
+        
+        background-image: linear-gradient(to bottom, #c5050c, #c5050c 130px, #F7F7F7 100px, #F7F7F7);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    </style>
+
+</head>
+
+
+
+
+<body>
+
+    <div id="mDiv">
+        <img id ="logo" src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_bBCsLCCeBif4ma1" width=300px;>
+        <br>
+        <div id= "centered">
+            If you'd like to take a break, click any of the three links, above, to open comics.<br>
+            
+            <br><br>
+        
+            <h2 id = "Problem"></h2>
+            
+            
+            <input type="number" id="myNumber" value= "">
+            <p>Press 'Enter' to Submit Your Answer</p>
+            <p id = "Error"></p>
+            
+            
+            <h2 id = "Ans"></h2>
+            <h2 id = "Num1"></h2>
+            <h2 id = "Num2"></h2>
+            <p id = "nCor"></p>
+            <p id = "nInc"></p>
+            <p id = "activ"></p>
+            <p id = "test2"></p>
+            
+        </div>
+        <div align = "right">
+                <button id="myBtn4"><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_3Oh95AYclEqCdrT" width=150px></button>
+        </div>
+       
+        <br><br><br><br><br><br><br><br><br><br>
+    </div>
+
+    <div id="links">
+            
+            <button id="myBtn">Read XKCD Comics</button>
+            <button id="myBtn2">Read Dilbert Comics</button>
+            <button id="myBtn3">Read New Yorker Comics</button>
+            
+            <br>
+    </div>
+
+    
+
+    <div class="modal" id="myModal">
+    <div class="modal-content"><span class="close">x</span>
+
+    <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_6rIYCfG84F8jBGd" width=100%></p>
+    </div>
+    </div>
+
+    <div class="modal" id="myModal2">
+    <div class="modal-content"><span class="close">x</span>
+
+    <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_0fELoHO9Xm2077D" width=100%></p>
+    </div>
+    </div>
+
+    <div class="modal" id="myModal3">
+    <div class="modal-content"><span class="close">x</span>
+
+    <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_0wCeyMJrYRpYXBz" width=100%></p>
+    </div>
+    </div>
+
+    <div class="modal" id="myModal4">
+    <div class="modal-content"><span class="close">x</span>
+    
+     <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_3Oh95AYclEqCdrT" width=100%></p>
+     </div>
+     </div>
+
+
+    <script>
+        // Initialize the variables
+        var pageOpen = new Date();
+        //var IDNo = 666
+        //var condition = 1
+        var distractedTime = 0;
+        var studyTime = 0;
+        //document.getElementById("test2").innerHTML = distractedTime;	
+        var openTime;
+        var closeTime;
+        var studyOpenTime;
+        var studyCloseTime;
+        var popOpen = 0;
+        var activity = "";
+        //document.getElementById("activ").innerHTML = activity;
+            
+        // Get the modal
+        var modal = document.getElementById('myModal');
+        var modal2 = document.getElementById('myModal2');
+        var modal3 = document.getElementById('myModal3');
+        var modal4 = document.getElementById('myModal4');
+        
+        // Get the buttons that opens the modal
+        var btn = document.getElementById("myBtn");
+        var btn2 = document.getElementById("myBtn2");
+        var btn3 = document.getElementById("myBtn3");
+        var btn4 = document.getElementById("myBtn4");
+
+        // Get the <span> elements that close each modal
+        var span = document.getElementsByClassName("close")[0];
+        var span2 = document.getElementsByClassName("close")[1];
+        var span3 = document.getElementsByClassName("close")[2];
+        var span4 = document.getElementsByClassName("close")[3];
+        
+        function getURLParameter(name) {
+              return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+              }
+            
+        // Tell the computer what to do when time runs out. Close any open popup and store time.
+        
+        function timeUp() {
+            if(popOpen ==1) {
+                popOpen = 0;
+                    modal.style.display = "none";
+                modal2.style.display = "none";
+                modal3.style.display = "none";
+                modal4.style.display = "none";
+                closeTime = new Date();
+                distractedTime = distractedTime + Math.abs(closeTime - openTime);
+                studyTime = studyTime + Math.abs(studyCloseTime - studyOpenTime);
+                //document.getElementById("test2").innerHTML = distractedTime;	
+                            }
+                //window.alert("Please get your supervisor to complete the next part.");
+                var IDNo = getURLParameter('ID');
+                var condition = getURLParameter('CN');
+                var myLink = "https://uwmadison.co1.qualtrics.com/jfe/form/SV_5cDEnJ8AIaieBrn?DT="+ distractedTime + "&ST=" + studyTime + "&ID=" + IDNo + "&CN=" + condition + "&NC=" + nCorrect + "&NI=" + nIncorrect + "&AV=" + activity;
+                //The line below navigates to the link: 
+                window.location.href =(myLink);
+            
+        }
+        
+        // Start timing from the second the page opens. End when specified below, in miliseconds
+        
+        setTimeout(timeUp,240000);
+        
+        
+            
+        // When the user clicks on the button, open the modal 
+        btn.onclick = function() {
+            popOpen = 1;
+            modal.style.display = "block";
+            openTime = new Date();
+            activity += "b";
+            //document.getElementById("test").innerHTML = openTime;	
+        }
+        
+        // When the user clicks on 2nd button, open the modal 
+        btn2.onclick = function() {
+            popOpen = 1;
+            modal2.style.display = "block";
+            openTime = new Date();
+            activity += "b";
+            //document.getElementById("test").innerHTML = openTime;	
+        }
+        
+        // When the user clicks on 3rd button, open the modal 
+        btn3.onclick = function() {
+            popOpen = 1;
+            modal3.style.display = "block";
+            openTime = new Date();
+            activity += "b";
+            //document.getElementById("test").innerHTML = openTime;	
+        }
+
+        // When the user clicks on 4th button, open the modal 
+        btn4.onclick = function() {
+            popOpen = 1;
+            modal4.style.display = "block";
+            studyOpenTime = new Date();
+            activity += "s";
+            //document.getElementById("test").innerHTML = openTime;	
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            popOpen = 0;
+            modal.style.display = "none";
+            closeTime = new Date();
+            distractedTime = distractedTime + Math.abs(closeTime - openTime);
+            //document.getElementById("test2").innerHTML = distractedTime;	
+        }
+        span2.onclick = function() {
+            popOpen = 0;
+            modal2.style.display = "none";
+            closeTime = new Date();
+            distractedTime = distractedTime + Math.abs(closeTime - openTime);
+            //document.getElementById("test2").innerHTML = distractedTime;	
+        }
+        span3.onclick = function() {
+            popOpen = 0;
+            modal3.style.display = "none";
+            closeTime = new Date();
+            distractedTime = distractedTime + Math.abs(closeTime - openTime);
+            //document.getElementById("test2").innerHTML = distractedTime;	
+        }
+
+        span4.onclick = function() {
+            popOpen = 0;
+            modal4.style.display = "none";
+            studyCloseTime = new Date();
+            studyTime = studyTime + Math.abs(studyCloseTime - studyOpenTime);
+            //document.getElementById("test2").innerHTML = studyTime;		
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                popOpen = 0;
+                modal.style.display = "none";
+                closeTime = new Date();
+            distractedTime = distractedTime + Math.abs(closeTime - openTime);
+            //document.getElementById("test2").innerHTML = distractedTime;	
+            }
+            if (event.target == modal2) {
+                popOpen = 0;
+                modal2.style.display = "none";
+                closeTime = new Date();
+            distractedTime = distractedTime + Math.abs(closeTime - openTime);
+            //document.getElementById("test2").innerHTML = distractedTime;	
+            }
+            if (event.target == modal3) {
+                popOpen = 0;
+                modal3.style.display = "none";
+                closeTime = new Date();
+            distractedTime = distractedTime + Math.abs(closeTime - openTime);
+            //document.getElementById("test2").innerHTML = distractedTime;	
+            }
+            if (event.target == modal4) {
+                popOpen = 0;
+                modal4.style.display = "none";
+                studyCloseTime = new Date();
+            studyTime = studyTime + Math.abs(studyCloseTime - studyOpenTime);
+            //document.getElementById("test2").innerHTML = studyTime;	
+            }
+        
+        }
+
+        var n1 = Math.floor(Math.random() * 99) + 1; 
+        var n2 = Math.floor(Math.random() * 99) + 1; 
+        var ans = n1*n2;
+        var nCorrect = 0;
+        var nIncorrect = 0;
+
+        // Initialize lists of predetermined problems and the index variable to interate through them
+        var tN = [12,25,22,30,61,15,33,14,20,26,37,15,45,17,36,11,25,36,19,29,16,24,13,18,34,14,26,16,34,26];
+        var bN = [44,21,12,25,12,30,21,13,45,31,23,43,12,34,15,41,36,10,24,15,26,34,46,22,26,43,30,24,32,41];
+        var i = 0;
+
+
+        makeProblem();
+
+        document.getElementById('myNumber').onkeydown = function(e){
+        if(e.keyCode == 13){
+            checkProblem();
+        }
+        };
+
+        function makeProblem(){
+            //document.getElementById("activ").innerHTML = activity;
+            n1 = tN[i];
+            n2 = bN[i];
+            if(i > tN.length-1){
+                n1 = Math.floor(Math.random() * 50) + 10; 
+                n2 = Math.floor(Math.random() * 50) + 10; 
+            }
+            
+            ans = n1*n2
+            //document.getElementById("Num1").innerHTML = "Num 1 equals " + n1;
+            //document.getElementById("Num2").innerHTML = "Num 2 equals " + n2;
+            document.getElementById("Problem").innerHTML =  "&nbsp;&nbsp;&nbsp;" + n1  + "<br> x " + n2;
+            //document.getElementById("Ans").innerHTML = ans;
+            document.getElementById("nCor").innerHTML = "Correct: " + nCorrect;
+            //document.getElementById("nInc").innerHTML = "Incorrect: " + nIncorrect;
+            document.getElementById("myNumber").value = "";
+            i = i+1;
+        }
+
+
+        function checkProblem() {
+            var x = document.getElementById("myNumber").value;
+            document.getElementById("Error").innerHTML = "";
+            if(x == ""){
+                document.getElementById("Error").innerHTML = "You must enter an answer before submitting.";
+            }
+            
+            else if(x == ans){
+                nCorrect = nCorrect + 1;
+                document.getElementById("nCor").innerHTML = "Correct: " + nCorrect;
+                activity += "c";
+                makeProblem();
+            }
+            else{
+                nIncorrect = nIncorrect + 1;
+                activity += "i";
+                //document.getElementById("nInc").innerHTML = "Incorrect: " + nIncorrect;
+                makeProblem();
+            }
+
+        }
+            
+            
+        </script>
+
+</body>
+
+</html>
