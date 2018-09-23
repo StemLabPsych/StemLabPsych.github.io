@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <style media="screen" type="text/css">
+        
+    #mDiv{
+        width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color:white;
+        position: relative; top: 30px;
+        padding: 20px;
+        height:100vh;
+    }
+
+    #centered{
+        text-align: center;
+    }
+        
+    body{
+        
+        background-image: linear-gradient(to bottom, #c5050c, #c5050c 130px, #F7F7F7 100px, #F7F7F7);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
+
+    input[type=number] {
+        border: 2px solid #c5050c;
+        border-radius: 4px;
+        width: 150px;
+        height: 30px;
+        text-align: center; 
+    }
+
+    input[type=number]:focus, textarea:focus {
+        box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+        padding: 3px 0px 3px 3px;
+        margin: 5px 1px 3px 0px;
+        border: 1px solid rgba(81, 203, 238, 1);
+    }
+
+    input[type=number], textarea {
+        outline: none;
+        padding: 3px 0px 3px 3px;
+        margin: 5px 1px 3px 0px;
+        border: 1px solid #DDDDDD;
+    }
+        
+    </style>
+</head>
+
+
+<body>
+
+    
+
+    <div id = "mDiv">
+            <img id ="logo" src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_bBCsLCCeBif4ma1" width=300px;>
+            <br>
+            <div id= "centered">
+                <br>
+                Practice by solving as many problems as you can in 2 minutes <br>
+                
+                <br>
+            
+                <h2 id = "Problem"></h2>
+                
+                
+                <input type="number" id="myNumber" value= "">
+                <p>Press 'Enter' to Submit Your Answer</p>
+                <p id = "Error"></p>
+                
+                
+                <h2 id = "Ans"></h2>
+                <h2 id = "Num1"></h2>
+                <h2 id = "Num2"></h2>
+                <p id = "nCor"></p>
+                <p id = "nInc"></p>
+                <p id = "activ"></p>
+                <p id = "test2"></p>
+                
+                <br><br><br><br><br><br><br><br>
+
+            </div>
+
+    </div>
+
+    
+
+    
+
+
+
+<script>
+    // Initialize the variables
+    var pageOpen = new Date();
+    //var IDNo = 666
+    //var condition = 1
+    var activity = "";
+    
+    document.getElementById("activ").innerHTML = activity;
+
+    function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+    }
+
+    function timeUp() {
+        //window.alert("Please get your supervisor to complete the next part.");
+        var IDNo = getURLParameter('ID');
+        var condition = getURLParameter('CN');
+        var myLink = "https://uwmadison.co1.qualtrics.com/jfe/form/SV_3IAFTaDiLyMWICx?ID="+ IDNo + "&CN=" + condition + "&NC=" + nCorrect + "&NI=" + nIncorrect + "&AV=" + activity;
+        //The line below navigates to the link: 
+        window.location.href =(myLink);     
+    }
+
+
+    function makeProblem(){
+        //document.getElementById("activ").innerHTML = activity;
+        n1 = tN[i];
+        n2 = bN[i];
+        if(i > tN.length-1){
+            n1 = Math.floor(Math.random() * 50) + 10; 
+            n2 = Math.floor(Math.random() * 50) + 10; 
+        }
+        ans = n1*n2
+        //document.getElementById("Num1").innerHTML = "Num 1 equals " + n1;
+        //document.getElementById("Num2").innerHTML = "Num 2 equals " + n2;
+        document.getElementById("Problem").innerHTML =  "&nbsp;&nbsp;&nbsp;" + n1  + "<br> x " + n2;
+        //document.getElementById("Ans").innerHTML = ans;
+        //document.getElementById("nCor").innerHTML = "Correct: " + nCorrect;
+        //document.getElementById("nInc").innerHTML = "Incorrect: " + nIncorrect;
+        document.getElementById("myNumber").value = "";
+        i = i+1;
+    }
+
+    function checkProblem() {
+        var x = document.getElementById("myNumber").value;
+        document.getElementById("Error").innerHTML = "";
+        if(x == ""){
+            document.getElementById("Error").innerHTML = "You must enter an answer before submitting.";
+        }
+            
+        else if(x == ans){
+            nCorrect = nCorrect + 1;
+            //document.getElementById("nCor").innerHTML = "Correct: " + nCorrect;
+            activity += "c";
+            makeProblem();
+        }
+        
+        else{
+            nIncorrect = nIncorrect + 1;
+            activity += "i";
+            //document.getElementById("nInc").innerHTML = "Incorrect: " + nIncorrect;
+            makeProblem();
+        }
+
+    }
+
+    // Start timing from the second the page opens. End when specified below, in miliseconds
+    setTimeout(timeUp,122000);
+    
+    var n1 = Math.floor(Math.random() * 99) + 1; 
+    var n2 = Math.floor(Math.random() * 99) + 1; 
+    var ans = n1*n2;
+    var nCorrect = 0;
+    var nIncorrect = 0;
+
+    // Initialize lists of predetermined problems and the index variable to interate through them,
+    // tN is the "top number" and bN is the "bottom number"
+    var tN = [12,25,22,30,61,15,33,14,20,26,37,15,45,17,36,11,25,36,19,29,16,24,13,18,34,14,26,16,34,26];
+    var bN = [44,21,12,25,12,30,21,13,45,31,23,43,12,34,15,41,36,10,24,15,26,34,46,22,26,43,30,24,32,41];
+    var i = 0;
+
+    makeProblem();
+
+    document.getElementById('myNumber').onkeydown = function(e){
+        if(e.keyCode == 13){
+            checkProblem();
+        }
+    };
+
+</script>
+
+</body>
+
+</html>
