@@ -117,7 +117,8 @@
         var IDNo = getURLParameter('ID');
         var condition = getURLParameter('CN');
         var female = getURLParameter('FM');
-        var myLink = "https://uwmadison.co1.qualtrics.com/jfe/form/SV_3IAFTaDiLyMWICx?ID="+ IDNo + "&CN=" + condition + "&NC1=" + nCorrect + "&NI1=" + nIncorrect + "&AV1=" + activity + "&FM=" + female;
+        var PCM = getURLParameter('FM');
+        var myLink = "https://uwmadison.co1.qualtrics.com/jfe/form/SV_3IAFTaDiLyMWICx?ID="+ IDNo + "&NC1=" + nCorrect + "&NI1=" + nIncorrect + "&AV1=" + activity + "&FM=" + female + "&PCM=" + PCM;
         //The line below navigates to the link: 
         window.location.href =(myLink);     
     }
