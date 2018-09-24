@@ -3,7 +3,9 @@
 <html lang="en">
 
 <head>
-    <style media="screen" type="text/css">.modal {
+    <style media="screen" type="text/css">
+    
+    .modal {
         display: none; /* Hidden by default */
         position: fixed; /* Stay in place */
         z-index: 1; /* Sit on top */
@@ -103,8 +105,6 @@
     </style>
 
 </head>
-
-
 
 
 <body>
@@ -236,7 +236,7 @@
                 //window.alert("Please get your supervisor to complete the next part.");
                 var IDNo = getURLParameter('ID');
                 var condition = getURLParameter('CN');
-                var myLink = "https://uwmadison.co1.qualtrics.com/jfe/form/SV_5cDEnJ8AIaieBrn?DT="+ distractedTime + "&ST=" + studyTime + "&ID=" + IDNo + "&CN=" + condition + "&NC=" + nCorrect + "&NI=" + nIncorrect + "&AV=" + activity;
+                var myLink = "https://uwmadison.co1.qualtrics.com/jfe/form/SV_6KzQBcgCRt36Fa5?DT="+ distractedTime + "&ST=" + studyTime + "&ID=" + IDNo + "&CN=" + condition + "&NC2=" + nCorrect + "&NI2=" + nIncorrect + "&AV2=" + activity;
                 //The line below navigates to the link: 
                 window.location.href =(myLink);
             
