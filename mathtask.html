@@ -17,6 +17,8 @@
         background-color: rgb(0,0,0); /* Fallback color */
         background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     }
+
+
     input[type=number]::-webkit-inner-spin-button, 
     input[type=number]::-webkit-outer-spin-button { 
         -webkit-appearance: none; 
@@ -67,8 +69,33 @@
         left:50%;
     }
 
+    #explain{
+        text-align: center;
+        font-size: 20px;
+    }
+    
+    #Error{
+        color:#c5050c;
+    }
+
+    .studyButton{
+        padding-right: 50px;
+    }
+
+    #submitNextButtons {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     #centered{
         text-align: center;
+    }
+
+    .centered{
+        text-align: center;     
     }
 
     /* Modal Content/Box */
@@ -78,6 +105,39 @@
         padding: 20px;
         border: 1px solid #888;
         width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    .modal-ans-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 80px;
+        border: 1px solid #888;
+        width: 50%; /* Could be more or less, depending on screen size */
+        height: 20%;
+    }
+
+    .blueButton {
+        background-color: #0479a8;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        padding: 10px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .comicButton {
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        
+    }
+
+    .divider{
+        width:10px;
+        height:auto;
+        display:inline-block;
     }
 
     body{
@@ -113,15 +173,18 @@
         <img id ="logo" src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_bBCsLCCeBif4ma1" width=300px;>
         <br>
         <div id= "centered">
-            If you'd like to take a break, click any of the three links, above, to open comics.<br>
+            <b>If you'd like to take a break, click any of the three links, above, to open comics.</b>
             
-            <br><br>
+            <br><br><br>
         
             <h2 id = "Problem"></h2>
             
             
             <input type="number" id="myNumber" value= "">
-            <p>Press 'Enter' to Submit Your Answer</p>
+            <br><br>
+            <!-- <p>Press 'Enter' to Check Your Answer</p> -->
+            <button onclick="checkProblem()" class="blueButton">  Check Your Answer </button>
+            <button onclick="skipProblem()" class="blueButton">Skip to Next Problem</button>
             <p id = "Error"></p>
             
             
@@ -134,8 +197,9 @@
             <p id = "test2"></p>
             
         </div>
-        <div align = "right">
-                <button id="myBtn4"><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_6tHjnEuI9zHnEK9" width=150px></button>
+        <div align = "right" class="studyButton">
+                <p>Click Below to Open Review Sheet</p>
+                <button id="myBtn4"><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_6tHjnEuI9zHnEK9" width=210px></button>
         </div>
        
         <br><br><br><br><br><br><br><br><br><br>
@@ -143,42 +207,58 @@
 
     <div id="links">
             
-            <button id="myBtn">Read XKCD Comics</button>
-            <button id="myBtn2">Read Dilbert Comics</button>
-            <button id="myBtn3">Read New Yorker Comics</button>
+            <button id="myBtn" class="comicButton">Read XKCD Comics</button>
+            <div class="divider"></div>
+            <button id="myBtn2" class="comicButton">Read Dilbert Comics</button>
+            <div class="divider"></div>
+            <button id="myBtn3" class="comicButton">Read New Yorker Comics</button>
             
             <br>
     </div>
 
     
 
-    <div class="modal" id="myModal">
+    <div class="modal" id="xkcd">
     <div class="modal-content"><span class="close">x</span>
 
     <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_6rIYCfG84F8jBGd" width=100%></p>
     </div>
     </div>
 
-    <div class="modal" id="myModal2">
+    <div class="modal" id="dilbert">
     <div class="modal-content"><span class="close">x</span>
 
     <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_0fELoHO9Xm2077D" width=100%></p>
     </div>
     </div>
 
-    <div class="modal" id="myModal3">
+    <div class="modal" id="newYorker">
     <div class="modal-content"><span class="close">x</span>
 
     <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_0wCeyMJrYRpYXBz" width=100%></p>
     </div>
     </div>
 
-    <div class="modal" id="myModal4">
+    <div class="modal" id="studySheet">
     <div class="modal-content"><span class="close">x</span>
     
-     <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_6tHjnEuI9zHnEK9" width=100%></p>
-     </div>
-     </div>
+    <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_6tHjnEuI9zHnEK9" width=100%></p>
+    </div>
+    </div>
+
+    <div class="modal" id="checkAnswer">
+    <div class="modal-ans-content">
+        
+        <p id = "explain"></p>
+        <div class ="centered">
+            <button onclick="redoProblem()" class="blueButton">Redo Problem</button>
+            <button onclick="nextProblem()" class="blueButton">Next Problem</button>
+            <br>
+        </div>
+        
+
+    </div>
+    </div>
 
 
     <script>
@@ -195,13 +275,15 @@
         var studyCloseTime;
         var popOpen = 0;
         var activity = "";
-        //document.getElementById("activ").innerHTML = activity;
+        document.getElementById("activ").innerHTML = activity;
             
         // Get the modal
-        var modal = document.getElementById('myModal');
-        var modal2 = document.getElementById('myModal2');
-        var modal3 = document.getElementById('myModal3');
-        var modal4 = document.getElementById('myModal4');
+        var modal = document.getElementById('xkcd');
+        var modal2 = document.getElementById('dilbert');
+        var modal3 = document.getElementById('newYorker');
+        var modal4 = document.getElementById('studySheet');
+        var modal5 = document.getElementById('checkAnswer');
+        
         
         // Get the buttons that opens the modal
         var btn = document.getElementById("myBtn");
@@ -214,6 +296,7 @@
         var span2 = document.getElementsByClassName("close")[1];
         var span3 = document.getElementsByClassName("close")[2];
         var span4 = document.getElementsByClassName("close")[3];
+        
         
         function getURLParameter(name) {
               return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
@@ -362,14 +445,9 @@
 
         makeProblem();
 
-        document.getElementById('myNumber').onkeydown = function(e){
-        if(e.keyCode == 13){
-            checkProblem();
-        }
-        };
 
         function makeProblem(){
-            //document.getElementById("activ").innerHTML = activity;
+            document.getElementById("activ").innerHTML = activity;
             n1 = tN[i];
             n2 = bN[i];
             if(i > tN.length-1){
@@ -387,26 +465,46 @@
             document.getElementById("myNumber").value = "";
             i = i+1;
         }
+        
+        function nextProblem() {
+            modal5.style.display = "none";
+            makeProblem();
+        }
 
+        function skipProblem() {
+            document.getElementById("Error").innerHTML = "";
+            activity += "s";
+            makeProblem();
+        }
+
+        function redoProblem() {
+            activity += "r";
+            document.getElementById("myNumber").value = "";
+            modal5.style.display = "none";
+        }
 
         function checkProblem() {
             var x = document.getElementById("myNumber").value;
             document.getElementById("Error").innerHTML = "";
             if(x == ""){
-                document.getElementById("Error").innerHTML = "You must enter an answer before submitting.";
+                document.getElementById("Error").innerHTML = "You must enter an answer before you can check it.";
             }
             
             else if(x == ans){
                 nCorrect = nCorrect + 1;
+                modal5.style.display = "block";
+                document.getElementById("explain").innerHTML = "Correct! Your answer was: " + x + "<br />" + "The correct answer was: " + ans;
                 //document.getElementById("nCor").innerHTML = "Correct: " + nCorrect;
                 activity += "c";
-                makeProblem();
+                
             }
             else{
                 nIncorrect = nIncorrect + 1;
+                modal5.style.display = "block";
+                document.getElementById("explain").innerHTML = "Your answer was: " + x + "<br />" + "The correct answer was: " + ans;
                 activity += "i";
                 //document.getElementById("nInc").innerHTML = "Incorrect: " + nIncorrect;
-                makeProblem();
+                
             }
 
         }
