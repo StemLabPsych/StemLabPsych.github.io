@@ -10,6 +10,6 @@
 
 - This contains a version of the diligence task for the Fungus paradigm. It's currently configured to redirect to Cameron's F18 qualtrics.
 
-# mathdemo.html
+# mathDemo.html
 
 - This contains an outdated version of the diligence task for math, intended to share with collaborators, as it does not redirect to a study.
