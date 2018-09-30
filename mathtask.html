@@ -79,7 +79,7 @@
     }
 
     .studyButton{
-        padding-right: 50px;
+        padding-left: 50px;
     }
 
     #submitNextButtons {
@@ -134,8 +134,14 @@
         
     }
 
-    .divider{
+    .dividerTop{
         width:10px;
+        height:auto;
+        display:inline-block;
+    }
+    
+    .dividerBottom{
+        width:30px;
         height:auto;
         display:inline-block;
     }
@@ -184,7 +190,10 @@
             <br><br>
             <!-- <p>Press 'Enter' to Check Your Answer</p> -->
             <button onclick="checkProblem()" class="blueButton">  Check Your Answer </button>
-            <button onclick="skipProblem()" class="blueButton">Skip to Next Problem</button>
+            <br/><br/>
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            <button onclick="skipProblem()" class="blueButton">Skip to Next Problem >> </button>
             <p id = "Error"></p>
             
             
@@ -197,7 +206,7 @@
             <p id = "test2"></p>
             
         </div>
-        <div align = "right" class="studyButton">
+        <div align = "left" class="studyButton">
                 <p>Click Below to Open Review Sheet</p>
                 <button id="myBtn4"><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_6tHjnEuI9zHnEK9" width=210px></button>
         </div>
@@ -208,9 +217,9 @@
     <div id="links">
             
             <button id="myBtn" class="comicButton">Read XKCD Comics</button>
-            <div class="divider"></div>
+            <div class="dividerTop"></div>
             <button id="myBtn2" class="comicButton">Read Dilbert Comics</button>
-            <div class="divider"></div>
+            <div class="dividerTop"></div>
             <button id="myBtn3" class="comicButton">Read New Yorker Comics</button>
             
             <br>
@@ -221,28 +230,28 @@
     <div class="modal" id="xkcd">
     <div class="modal-content"><span class="close">x</span>
 
-    <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_6rIYCfG84F8jBGd" width=100%></p>
+    <p><img src="Images/xkcd.jpg" width=100%></p>
     </div>
     </div>
 
     <div class="modal" id="dilbert">
     <div class="modal-content"><span class="close">x</span>
 
-    <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_0fELoHO9Xm2077D" width=100%></p>
+    <p><img src="Images/Dilbert.jpg" width=100%></p>
     </div>
     </div>
 
     <div class="modal" id="newYorker">
     <div class="modal-content"><span class="close">x</span>
 
-    <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/File.php?F=F_0wCeyMJrYRpYXBz" width=100%></p>
+    <p><img src="Images/NewYorker.jpg" width=100%></p>
     </div>
     </div>
 
     <div class="modal" id="studySheet">
     <div class="modal-content"><span class="close">x</span>
     
-    <p><img src="https://uwmadison.co1.qualtrics.com/ControlPanel/Graphic.php?IM=IM_6tHjnEuI9zHnEK9" width=100%></p>
+    <p><img src="Images/SummarySheet.jpg" width=100%></p>
     </div>
     </div>
 
@@ -473,7 +482,7 @@
 
         function skipProblem() {
             document.getElementById("Error").innerHTML = "";
-            activity += "s";
+            activity += "k";
             makeProblem();
         }
 
