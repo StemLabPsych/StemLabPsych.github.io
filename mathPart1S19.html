@@ -119,8 +119,8 @@
         var PCM = getURLParameter('PCM');
         var UV = getURLParameter('UV');
         var chemistry = getURLParameter('CH');
-        var RID = getURLParameter('RID');
-        var myLink = "https://uwmadison.co1.qualtrics.com/jfe/form/SV_9TWoIhyvT5IdlXL?ID="+ IDNo + "&NC1=" + nCorrect + "&NI1=" + nIncorrect + "&AV1=" + activity + "&FM=" + female + "&PCM=" + PCM + "&UV=" + UV + "&CH=" + chemistry + "&RID=" + RID;
+        var RD = getURLParameter('RD');
+        var myLink = "https://uwmadison.co1.qualtrics.com/jfe/form/SV_9TWoIhyvT5IdlXL?ID=" + IDNo + "&NC1=" + nCorrect + "&NI1=" + nIncorrect + "&AV1=" + activity + "&FM=" + female + "&PCM=" + PCM + "&UV=" + UV + "&CH=" + chemistry + "&RD=" + RD;
         //The line below navigates to the link: 
         window.location.href =(myLink);     
     }
@@ -169,7 +169,7 @@
     }
 
     // Start timing from the second the page opens. End when specified below, in miliseconds
-    setTimeout(timeUp,122000);
+    setTimeout(timeUp,120000);
     
     var n1 = Math.floor(Math.random() * 99) + 1; 
     var n2 = Math.floor(Math.random() * 99) + 1; 
